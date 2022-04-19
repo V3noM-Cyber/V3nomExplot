@@ -37,7 +37,7 @@ def stop_server(httpd):
 class Term(Cmd):
     def __init__(self, shell, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.prompt = f"spring4shell@{get_host(shell)} ~ # "
+        self.prompt = f"V3nom-Cyber@{get_host(shell)} ~ # "
         self.shell = shell
 
     def default(self, args):
