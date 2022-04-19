@@ -165,8 +165,8 @@ def main():
 ▐█▐█•  ▐█▐▐▌▐█▌.▐▌▐█ ▌▐▌▐█·  ▐▀▀▪▄ ·██·  ██▀·██ ▪ ▐█▌.▐▌▐█· ▐█.▪  
  ███   ██▐█▌▐█▌.▐▌██ ██▌▐█▌  ▐█▄▄▌▪▐█·█▌▐█▪·•▐█▌ ▄▐█▌.▐▌▐█▌ ▐█▌·  
 . ▀    ▀▀ █▪ ▀█▄▀▪▀▀  █▪▀▀▀   ▀▀▀ •▀▀ ▀▀.▀   .▀▀▀  ▀█▄▀▪▀▀▀ ▀▀▀   
-@exploit V3nom Cyber              #v 1.0
-@devloper Imfor X Halo
+@code by V3nom Cyber              #v 1.0
+@devloper OO Aland OO
  """)
 
     print("[~] Running exploit")
