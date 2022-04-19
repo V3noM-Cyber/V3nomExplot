@@ -9,7 +9,6 @@ from colorama import Fore, Back, Style
 from cmd import Cmd
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse
-
 import requests
 import urllib3
 
@@ -176,6 +175,7 @@ def main():
     time.sleep(1) 
     print("[!] To get a reverse shell run 'http:// <your-ip> <your-port>'")
     term = Term(shell)
+    os.system("xdg-open https://t.me/V3noM_Cyber")
     term.cmdloop()
 if __name__ == "__main__":
     try:
